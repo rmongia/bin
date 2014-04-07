@@ -1,0 +1,25 @@
+#!/bin/sh +x
+# Example usage: $0
+
+if [ $# -lt 1 ]; then
+   echo "Usage $0 <remote_ip>"
+   exit 1
+fi
+
+global_conf_git_repo=$HOME/code/prod/
+echo "Using $global_conf_git_repo as the configuration git repository"
+
+# . ~/kido/build/instartrc
+
+if [ $# = 1 ]; then
+  $HOME/kido/qa/tools/generate_etc_hosts.py --instart_svc_host=$1 ~/code/prod-config/
+fi
+
+if [ $# = 2 ]; then
+  $HOME/kido/qa/tools/generate_etc_hosts.py --instart_svc_host=$1 $2
+fi
+
+if [ $# = 3 ]; then
+  $HOME/kido/qa/tools/generate_etc_hosts.py --instart_svc_host=$1 --format=$3 $2
+fi
+
